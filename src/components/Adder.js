@@ -3,7 +3,6 @@ import Row from './Row';
 import bootstrap from 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/+esm'
 
 export default function Adder() {
-    const [sum, setSum] = useState(0);
     const [rows, setRows] = useState([]);
     const enableRow = (index) => {
         let newRows = rows;
@@ -71,7 +70,7 @@ export default function Adder() {
             <div>
                 Result: {rows.reduce((tot, curr) => 
                             tot + parseInt(curr.value && curr.enabled ?
-                                 (curr.sign == "+" ? curr.value : "-" + curr.value) : 0)
+                                 (curr.sign === "+" ? curr.value : "-" + curr.value) : 0)
                             , 0)}
             </div>
         </>

@@ -6,8 +6,9 @@ import Title from './components/Title';
 function App() {
   return (
     <div className="page-wrap">
-      
-      <Title>React Version: </Title>
+        {/* Challenge Title */}
+        <h1>Simple React calculator</h1>
+
       <Adder/>
 
     </div>
