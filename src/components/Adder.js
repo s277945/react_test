@@ -23,6 +23,13 @@ export default function Adder() {
             setRows([...newRows]);
         }
     };
+    const deleteRow = (index) => {
+        let newRows;
+        if (rows[index]) {
+            newRows = rows.slice(0, index).concat(rows.slice(index+1))
+            setRows([...newRows]);
+        }
+    };
     const changeRowValue = (value, index) => {
         let newRows = rows;
         if (newRows[index]) {
@@ -44,7 +51,7 @@ export default function Adder() {
     return(
         <>
             <div>
-                <button onClick={() => setRows(rows => [...rows, {sign: "+", value: 0, enabled: false}])}>Add row</button>
+                <button onClick={() => setRows(rows => [...rows, {sign: "+", value: 0, enabled: true}])}>Add row</button>
             </div>
             <ul>
                {rows.map((row, index) => 
@@ -54,7 +61,7 @@ export default function Adder() {
                         <option>-</option>
                     </select>
                         <input type="text" value={row.value} onChange={(event) => changeRowValue(event.target.value, index)}/>
-                        <button>Delete</button>
+                        <button onClick={() => deleteRow(index)}> Delete </button>
                         {row.enabled ? 
                         <button onClick={() => disableRow(index)}> Disable </button> : 
                         <button onClick={() => enableRow(index)}> Enable </button>}
