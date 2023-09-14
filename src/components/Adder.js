@@ -4,7 +4,7 @@ import bootstrap from 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/+esm'
 
 export default function Adder() {
     const [rows, setRows] = useState([]);
-    const setStateRow = (state, index) => {
+    const setEnabledRow = (state, index) => {
         let newRows = rows;
         if (newRows[index] && newRows[index].enabled != state) {
             let oldRow = newRows[index];
@@ -54,8 +54,8 @@ export default function Adder() {
                         <input type="text" value={row.value} onChange={(event) => changeRowValue(event.target.value, index)}/>
                         <button onClick={() => deleteRow(index)}> Delete </button>
                         {row.enabled ? 
-                        <button onClick={() => setStateRow(false, index)}> Disable </button> : 
-                        <button onClick={() => setStateRow(true, index)}> Enable </button>}
+                        <button onClick={() => setEnabledRow(false, index)}> Disable </button> : 
+                        <button onClick={() => setEnabledRow(true, index)}> Enable </button>}
                     </li>
                 )} 
             </ul>
