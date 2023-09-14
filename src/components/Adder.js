@@ -20,11 +20,12 @@ export default function Adder() {
             setRows([...newRows]);
         }
     };
-    const changeRowValue = (value, index) => {
+    const changeRowValue = (value, index, allowEmpty) => {
         let newRows = rows;
+        let number = parseInt(value);
         if (newRows[index]) {
             let oldRow = newRows[index];
-            let newRow = {sign: oldRow.sign, value: value, enabled: oldRow.enabled}
+            let newRow = {sign: oldRow.sign, value: isNaN(number) ? (allowEmpty ? "" : 0)  : number, enabled: oldRow.enabled}
             newRows[index] = newRow;
             setRows([...newRows]);
         }
@@ -51,7 +52,7 @@ export default function Adder() {
                         <option selected>+</option>
                         <option>-</option>
                     </select>
-                        <input type="text" value={row.value} onChange={(event) => changeRowValue(event.target.value, index)}/>
+                        <input type="text" value={row.value} onBlur={(event) => changeRowValue(event.target.value, index, false)} onChange={(event) => changeRowValue(event.target.value, index, true)}/>
                         <button onClick={() => deleteRow(index)}> Delete </button>
                         {row.enabled ? 
                         <button onClick={() => setEnabledRow(false, index)}> Disable </button> : 
