@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import Row from './Row';
-import bootstrap from 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/+esm'
 
-// Adder component
+// Adder component, allows to add or subtracts values inside rows;
+// rows can be added, enabled/disabled and deleted
 export default function Adder() {
     // Internal state made of array of rows
     const [rows, setRows] = useState([]);
@@ -79,10 +78,12 @@ export default function Adder() {
 
     return(
         <>
+            {/*Button to add rows*/}
             <div>
                 <button onClick={() => setRows(rows => [...rows, {sign: "+", value: 0, enabled: true}])}>Add row</button>
             </div>
 
+            {/*Maps row array to rows inside page*/}
             <ul>
                {rows.map((row, index) => 
                 <li key={index}>
@@ -99,6 +100,7 @@ export default function Adder() {
                 )} 
             </ul>
 
+            {/*Result is computed below from row array values*/}
             <div>
                 Result: {rows.reduce((tot, curr) => 
                             tot + parseInt(curr.value && curr.enabled ?
