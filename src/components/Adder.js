@@ -2,43 +2,81 @@ import { useState } from 'react';
 import Row from './Row';
 import bootstrap from 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/+esm'
 
+// Adder component
 export default function Adder() {
+    // Internal state made of array of rows
     const [rows, setRows] = useState([]);
+    // Each row is an object containing the sign, integer value and enabled flag
+    // {sign: +/-, value: integer, enabled: true/false}
+
+    // arrow funtion to set a specific row's enabled state
+    // parameters: boolean state, row's index
     const setEnabledRow = (state, index) => {
-        let newRows = rows;
+        //create state array copy
+        let newRows = [...rows];
+        //check if there is a row at specified index and if it already has the desired state
         if (newRows[index] && newRows[index].enabled != state) {
+            //create new object and copy old values where needed
             let oldRow = newRows[index];
             let newRow = {sign: oldRow.sign, value: oldRow.value, enabled: state}
+            //insert new object in new array
             newRows[index] = newRow;
+            //update state with new array values
             setRows([...newRows]);
         }
     };
+
+    // arrow funtion to delete a specific row
+    // parameters: row's index
     const deleteRow = (index) => {
+        //create new state array
         let newRows;
+        //check if there is a row at specified index
         if (rows[index]) {
+            //copy rows minus deleted one inside new array
             newRows = rows.slice(0, index).concat(rows.slice(index+1))
+            //update state with new array values
             setRows([...newRows]);
         }
     };
+
+    // arrow funtion to set a specific row's integer value
+    // parameters: integer value, row's index, boolean value to allow "" inside the input field
     const changeRowValue = (value, index, allowEmpty) => {
-        let newRows = rows;
+        //create state array copy
+        let newRows = [...rows];
+        //parse value in new integer
         let number = parseInt(value);
+        //check if there is a row at specified index
         if (newRows[index]) {
+            //create new object and copy old values where needed
             let oldRow = newRows[index];
             let newRow = {sign: oldRow.sign, value: isNaN(number) ? (allowEmpty ? "" : 0)  : number, enabled: oldRow.enabled}
+            //insert new object in new array
             newRows[index] = newRow;
+            //update state with new array values
             setRows([...newRows]);
         }
     }
+
+    // arrow funtion to set a specific row's enabled state
+    // parameters: value's sign, row's index
     const changeRowSign = (sign, index) => {
-        let newRows = rows;
+        //create state array copy
+        let newRows = [...rows];
+        //check if there is a row at specified index
         if (newRows[index]) {
+            //create new object and copy old values where needed
             let oldRow = newRows[index];
             let newRow = {sign: sign, value: oldRow.value, enabled: oldRow.enabled}
+            //insert new object in new array
             newRows[index] = newRow;
+            //update state with new array values
             setRows([...newRows]);
         }
     }
+
+
     return(
         <>
             <div>
