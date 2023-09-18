@@ -91,6 +91,7 @@ export default function Adder() {
                         <option selected>+</option>
                         <option>-</option>
                     </select>
+                        {/*Allows row value to be "" while using the input form, then sets it to 0 if still empty once user clicks elsewhere*/}
                         <input type="text" value={row.value} onBlur={(event) => changeRowValue(event.target.value, index, false)} onChange={(event) => changeRowValue(event.target.value, index, true)}/>
                         <button onClick={() => deleteRow(index)}> Delete </button>
                         {row.enabled ? 
