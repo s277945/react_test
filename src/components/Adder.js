@@ -87,8 +87,8 @@ export default function Adder() {
             <ul>
                {rows.map((row, index) => 
                 <li key={index}>
-                    <select onChange={(event) => changeRowSign(event.target.value, index)}>
-                        <option selected>+</option>
+                    <select value={row.sign} onChange={(event) => changeRowSign(event.target.value, index)}>
+                        <option>+</option>
                         <option>-</option>
                     </select>
                         {/*Allows row value to be "" while using the input form, then sets it to 0 if still empty once user clicks elsewhere*/}
