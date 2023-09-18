@@ -104,6 +104,7 @@ export default function Adder() {
             {/*Result is computed below from row array values*/}
             <div>
                 Result: {rows.reduce((tot, curr) => 
+                            /*Add row value to result if enabled and according to selected sign*/
                             tot + parseInt(curr.value && curr.enabled ?
                                  (curr.sign === "+" ? curr.value : "-" + curr.value) : 0)
                             , 0)}
